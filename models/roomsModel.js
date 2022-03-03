@@ -73,3 +73,34 @@ module.exports.play = async function (id, value) {
     return { status: 500, result: err };
   }
 }
+
+module.exports.getRoomByNameOrTopCard = async function (parameters) {
+  try {
+    if (!parameters.name && !parameters.topcard) {
+      return { status: 400, result: { msg: "No filters defined (name or topcard)" } };
+    }
+    let nparam = 1;
+    let values = [];
+    let sql = "Select * from room where";
+
+    if (parameters.name) {
+      sql += ` roo_name LIKE $${nparam}`;
+      values.push("%"+parameters.name+"%");
+      nparam++;
+    }
+    if (parameters.topcard) {
+      if (parameters.name) sql+=" AND"
+      sql += ` roo_topcard LIKE $${nparam}`;
+      values.push(parameters.topcard);
+      nparam++;
+    }
+    console.log(sql)
+    console.log(values)
+    let result = await pool.query(sql, values);
+    let rooms = result.rows;
+    return { status: 200, result: rooms };
+  } catch (err) {
+    console.log(err);
+    return { status: 500, result: err };
+  }
+}  

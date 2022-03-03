@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   let users = [
     {name: "Tomás", password:"NelioIsGod"},
-    {name: "monengue", password:"123"}];
+    {name: "IceIceBaby", password:"123"}];
   
     res.send(users);
 });
