@@ -17,7 +17,7 @@ async function getRoom(roomId) {
 async function play(roomId, card) {
     try {
         const response = await fetch(`/api/rooms/${roomId}/plays`,
-        {
+        {   
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

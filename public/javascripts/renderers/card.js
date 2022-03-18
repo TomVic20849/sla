@@ -1,3 +1,4 @@
+
 const imgCenterVertical = 0.4;
 const imgRelWidth = 0.6;
 const textCenterVertical = 0.8;
